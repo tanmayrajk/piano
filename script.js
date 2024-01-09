@@ -82,6 +82,12 @@ for (let i = 0; i < blackKeys.length; i++) {
     key.addEventListener("mouseup", () => {
         keyUp(key, 120)
     })
+    key.addEventListener("touchstart", e => {
+        keyDown(key, note, 115)
+    })
+    key.addEventListener("touchend", e => {
+        keyUp(key, 120)
+    })
 }
 
 let keyDownFlag = {};
