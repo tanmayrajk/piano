@@ -65,6 +65,12 @@ for (let i = 0; i < whiteKeysArr.length; i++) {
     key.addEventListener("mouseup", () => {
         keyUp(key, 200)
     })
+    key.addEventListener("touchstart", e => {
+        keyDown(key, note, 195)
+    })
+    key.addEventListener("touchend", e => {
+        keyUp(key, 200)
+    })
 }
 
 for (let i = 0; i < blackKeys.length; i++) {
