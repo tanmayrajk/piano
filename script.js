@@ -43,18 +43,27 @@ Tone.loaded().then(() => {
 	console.log("Sampler Loaded!")
 })
 
+function keyDown(key, note, h) {
+    const now = Tone.now()
+    sampler.triggerAttack(note, now)
+    key.style.height = `${h}px`;
+}
+
+function keyUp(key, h) {
+    const now = Tone.now()
+    sampler.triggerRelease(now)
+    key.style.height = `${h}px`;
+}
+
 for (let i = 0; i < whiteKeysArr.length; i++) {
     const key = whiteKeys[i];
     const note = key.id == "a"  || key.id == "b" ? `${key.id[0].toUpperCase()}3` : `${key.id[0].toUpperCase()}4`
+    
     key.addEventListener("mousedown", () => {
-        const now = Tone.now()
-        sampler.triggerAttack(note, now)
-        key.style.height = "195px";
+        keyDown(key, note, 195)
     })
     key.addEventListener("mouseup", () => {
-        const now = Tone.now()
-        sampler.triggerRelease(now)
-        key.style.height = "200px";
+        keyUp(key, 200)
     })
 }
 
@@ -62,14 +71,10 @@ for (let i = 0; i < blackKeys.length; i++) {
     const key = blackKeys[i];
     const note = key.id == "as" ? `${key.id[0].toUpperCase()}#3` : `${key.id[0].toUpperCase()}#4`
     key.addEventListener("mousedown", () => {
-        const now = Tone.now()
-        sampler.triggerAttack(note, now)
-        key.style.height = "115px";
+        keyDown(key, note, 115)
     })
     key.addEventListener("mouseup", () => {
-        const now = Tone.now()
-        sampler.triggerRelease(now)
-        key.style.height = "120px";
+        keyUp(key, 120)
     })
 }
 
@@ -84,15 +89,11 @@ window.addEventListener("keydown", (e) => {
     if (whiteKeysMap.includes(e.key)) {
         const key = whiteKeys[whiteKeysMap.indexOf(e.key)]
         const note = key.id == "a"  || key.id == "b" ? `${key.id[0].toUpperCase()}3` : `${key.id[0].toUpperCase()}4`
-        const now = Tone.now()
-        sampler.triggerAttack(note, now)
-        key.style.height = "195px";
+        keyDown(key, note, 195)
     } else if (blackKeysMap.includes(e.key) && !e.repeat) {
         const key = blackKeys[blackKeysMap.indexOf(e.key)]
         const note = key.id == "as" ? `${key.id[0].toUpperCase()}#3` : `${key.id[0].toUpperCase()}#4`
-        const now = Tone.now()
-        sampler.triggerAttack(note, now)
-        key.style.height = "115px";
+        keyDown(key, note, 115)
     }
 })
 
@@ -100,14 +101,10 @@ window.addEventListener("keyup", (e) => {
     keyDownFlag[e.key] = false;
     if (whiteKeysMap.includes(e.key)) {
         const key = whiteKeys[whiteKeysMap.indexOf(e.key)]
-        const now = Tone.now()
-        sampler.triggerRelease(now)
-        key.style.height = "200px";
+        keyUp(key, 200)
     } else if (blackKeysMap.includes(e.key)) {
         const key = blackKeys[blackKeysMap.indexOf(e.key)]
-        const now = Tone.now()
-        sampler.triggerRelease(now)
-        key.style.height = "120px";
+        keyUp(key, 120)
     }
 })
 
