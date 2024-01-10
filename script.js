@@ -90,6 +90,9 @@ for (let i = 0; i < blackKeys.length; i++) {
         keyUp(key, 120)
     })
     key.addEventListener("touchstart", e => {
+        if (letTouchDownFlag[key.id]) {
+            return
+        }
         letTouchDownFlag[key.id] = true;
         keyDown(key, note, 115)
     })
