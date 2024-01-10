@@ -55,6 +55,8 @@ function keyUp(key, h) {
     key.style.height = `${h}px`;
 }
 
+letTouchDownFlag = {}
+
 for (let i = 0; i < whiteKeysArr.length; i++) {
     const key = whiteKeys[i];
     const note = key.id == "a"  || key.id == "b" ? `${key.id[0].toUpperCase()}3` : `${key.id[0].toUpperCase()}4`
@@ -66,9 +68,14 @@ for (let i = 0; i < whiteKeysArr.length; i++) {
         keyUp(key, 200)
     })
     key.addEventListener("touchstart", e => {
+        if (letTouchDownFlag[key.id]) {
+            return
+        }
+        letTouchDownFlag[key.id] = true;
         keyDown(key, note, 195)
     })
     key.addEventListener("touchend", e => {
+        letTouchDownFlag[key.id] = false;
         keyUp(key, 200)
     })
 }
@@ -83,9 +90,11 @@ for (let i = 0; i < blackKeys.length; i++) {
         keyUp(key, 120)
     })
     key.addEventListener("touchstart", e => {
+        letTouchDownFlag[key.id] = true;
         keyDown(key, note, 115)
     })
     key.addEventListener("touchend", e => {
+        letTouchDownFlag[key.id] = false;
         keyUp(key, 120)
     })
 }
