@@ -55,7 +55,7 @@ function keyUp(key, h) {
     key.style.height = `${h}px`;
 }
 
-letTouchDownFlag = {}
+let TouchDownFlag = {}
 
 for (let i = 0; i < whiteKeysArr.length; i++) {
     const key = whiteKeys[i];
