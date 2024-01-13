@@ -3,6 +3,8 @@ const whiteKeysArr = Array.prototype.slice.call(whiteKeys);
 const blackKeys = document.getElementsByClassName("black");
 const whiteKeysMap = ['a', 's', 'd', 'f', 'j', 'k', 'l', ';'];
 const blackKeysMap = ['q', 'e', 'r', 'i', 'o'];
+const touchesEl = document.getElementById("touches")
+let touches = 0;
 
 function findBlackPosition(key) {
     const startKeyFunc = (el) => el.id == key.id[0];
@@ -73,6 +75,8 @@ for (let i = 0; i < whiteKeysArr.length; i++) {
         // }
         // touchDownFlag[key.id] = true;
         if (e.touches.length === 1) {
+            touches++;
+            touchesEl.innerText = touches;
             keyDown(key, note, 195)
         }
     })
@@ -96,6 +100,8 @@ for (let i = 0; i < blackKeys.length; i++) {
         // }
         // touchDownFlag[key.id] = true;
         if (e.touches.length === 1) {
+            touches++;
+            touchesEl.innerText = touches;
             keyDown(key, note, 115)
         }
     })
